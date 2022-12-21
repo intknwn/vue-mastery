@@ -16,7 +16,4 @@ export default {
   getEvent(id) {
     return api.get(`/events/${id}`)
   },
-  postEvent(event) {
-    return api.post('/events', event)
-  },
 }
