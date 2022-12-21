@@ -71,6 +71,24 @@
           "name": "Mary Gordon"
         }
       ]
+    },
+    {
+      "id": 747977,
+      "user": {
+        "id": "asdde12e",
+        "name": "Barbra Joan Streisand"
+      },
+      "category": "sustainability",
+      "organizer": {
+        "id": "asdde12e",
+        "name": "Barbra Joan Streisand"
+      },
+      "title": "Some event's title",
+      "desc": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
     }
   ]
 }
