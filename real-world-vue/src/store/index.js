@@ -53,6 +53,14 @@ export default new Vuex.Store({
         console.log('There is a problem creating an event')
       }
     },
+    async fetchEvents({ commit }) {
+      try {
+        const res = await EventService.getEvents()
+        commit('SET_EVENTS', res.data)
+      } catch {
+        console.log('Something went wrong while fetching events')
+      }
+    },
   },
   getters: {
     getEventById: (state) => (id) =>
@@ -62,6 +70,9 @@ export default new Vuex.Store({
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push(event)
+    },
+    SET_EVENTS(state, events) {
+      state.events = events
     },
   },
   modules: {},
