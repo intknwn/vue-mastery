@@ -43,6 +43,7 @@ export default new Vuex.Store({
       'food',
       'community',
     ],
+    event: null,
   },
   actions: {
     async createEvent({ commit }, event) {
@@ -63,6 +64,21 @@ export default new Vuex.Store({
         console.log('Something went wrong while fetching events')
       }
     },
+    async fetchEventById({ commit, getters }, id) {
+      const event = getters.getEventById(id)
+
+      if (event) {
+        commit('SET_EVENT', event)
+        return
+      }
+
+      try {
+        const { data } = await EventService.getEvent(id)
+        commit('SET_EVENT', data)
+      } catch {
+        console.log('Something went wrong while fetching event by ID')
+      }
+    },
   },
   getters: {
     getEventById: (state) => (id) =>
@@ -72,6 +88,9 @@ export default new Vuex.Store({
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push(event)
+    },
+    SET_EVENT(state, event) {
+      state.event = event
     },
     SET_EVENTS(state, events) {
       state.events = events
