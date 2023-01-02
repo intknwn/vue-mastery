@@ -53,10 +53,12 @@ export default new Vuex.Store({
         console.log('There is a problem creating an event')
       }
     },
-    async fetchEvents({ commit }) {
+    async fetchEvents({ commit }, { perPage, page }) {
       try {
-        const res = await EventService.getEvents()
-        commit('SET_EVENTS', res.data)
+        const { data, headers } = await EventService.getEvents(perPage, page)
+        commit('SET_EVENTS', data)
+        const totalEvents = parseInt(headers['x-total-count'])
+        commit('SET_TOTAL_EVENTS', totalEvents)
       } catch {
         console.log('Something went wrong while fetching events')
       }
@@ -73,6 +75,9 @@ export default new Vuex.Store({
     },
     SET_EVENTS(state, events) {
       state.events = events
+    },
+    SET_TOTAL_EVENTS(state, totalEvents) {
+      state.totalEvents = totalEvents
     },
   },
   modules: {},
