@@ -7,7 +7,10 @@
       "time": "10:00",
       "location": "Daytona Beach",
       "description": "Let's clean up this beach.",
-      "organizer": "Adam Jahr",
+      "organizer": {
+        "id": "asdsd22131d",
+        "name": "Adam Jahr"
+      },
       "category": "sustainability",
       "attendees": [
         {
@@ -35,7 +38,10 @@
       "time": "12:00",
       "location": "132 N Magnolia Street, Orlando, Florida",
       "description": "We're going to clean up this park.",
-      "organizer": "Adam Jahr",
+      "organizer": {
+        "id": "asdh9231hd23",
+        "name": "Adam Jahr"
+      },
       "category": "nature",
       "attendees": [
         {
@@ -55,7 +61,10 @@
       "time": "12:00",
       "location": "132 N Magnolia Street, Orlando, Florida",
       "description": "Help animals find new homes.",
-      "organizer": "Gregg Pollack",
+      "organizer": {
+        "id": "ajsdj0932",
+        "name": "Gregg Pollack"
+      },
       "category": "animal welfare",
       "attendees": [
         {
@@ -87,7 +96,25 @@
       "desc": "",
       "location": "",
       "date": "",
-      "time": "",
+      "time": "13:00",
+      "attendees": []
+    },
+    {
+      "id": 703348,
+      "user": {
+        "id": "asdde12e",
+        "name": "Barbra Joan Streisand"
+      },
+      "category": "housing",
+      "organizer": {
+        "id": "asdde12e",
+        "name": "Barbra Joan Streisand"
+      },
+      "title": "The latest event",
+      "desc": "Some description",
+      "location": "St. Petersburg",
+      "date": "2023-01-13T17:52:00.000Z",
+      "time": "18:00",
       "attendees": []
     }
   ]
