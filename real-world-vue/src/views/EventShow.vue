@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="event">
     <div class="event-header">
       <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
       <h1 class="title">{{ event.title }}</h1>
@@ -14,7 +14,7 @@
     <address>{{ event.location }}</address>
 
     <h2>Event details</h2>
-    <p>{{ event.description }}</p>
+    <p>{{ event.desc }}</p>
 
     <h2>
       Attendees
@@ -35,13 +35,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapActions } = createNamespacedHelpers('event')
 
 export default {
   props: ['id'],
   computed: mapState(['event']),
+  methods: mapActions(['fetchEventById']),
   created() {
-    this.$store.dispatch('fetchEventById', this.id)
+    this.fetchEventById(this.id)
   },
 }
 </script>
