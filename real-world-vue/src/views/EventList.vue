@@ -3,14 +3,14 @@
     <h1>Events for {{ user.name }}</h1>
     <EventCard v-for="event in events" :key="event.id" :event="event" />
     <router-link
-      v-if="currentPage !== 1"
+      v-if="isPrevLinkShown"
       :to="{ name: 'event-list', query: { page: currentPage - 1 } }"
       rel="prev"
       >Previous page</router-link
     >
-    |
+    <span v-if="isPrevLinkShown && isNextLinkShown"> | </span>
     <router-link
-      v-if="currentPage * perPage < totalEvents"
+      v-if="isNextLinkShown"
       :to="{ name: 'event-list', query: { page: currentPage + 1 } }"
       rel="prev"
       >Next page</router-link
@@ -45,6 +45,12 @@ export default {
     }),
     currentPage() {
       return parseInt(this.$route.query.page) || 1
+    },
+    isPrevLinkShown() {
+      return this.currentPage !== 1
+    },
+    isNextLinkShown() {
+      return this.currentPage * this.perPage < this.totalEvents
     },
   },
 }
