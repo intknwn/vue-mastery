@@ -53,12 +53,13 @@ export default {
 
       if (event) {
         commit('SET_EVENT', event)
-        return
+        return event
       }
 
       try {
         const { data } = await EventService.getEvent(id)
         commit('SET_EVENT', data)
+        return data
       } catch (err) {
         dispatch(
           'notification/add',

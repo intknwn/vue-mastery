@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import EventCreate from '../views/EventCreate.vue'
 import EventShow from '../views/EventShow.vue'
 import EventList from '../views/EventList.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,14 @@ const routes = [
     name: 'event-show',
     component: EventShow,
     props: true,
+    beforeEnter: async (routeTo, routeFrom, next) => {
+      const event = await store.dispatch(
+        'event/fetchEventById',
+        routeTo.params.id
+      )
+      routeTo.params.event = event
+      next()
+    },
   },
   {
     path: '/',
