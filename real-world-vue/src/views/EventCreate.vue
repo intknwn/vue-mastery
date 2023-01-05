@@ -75,6 +75,7 @@
 <script>
 import { mapState } from 'vuex'
 import Datepicker from 'vuejs-datepicker'
+import nProgress from 'nprogress'
 
 export default {
   components: {
@@ -93,6 +94,8 @@ export default {
   },
   methods: {
     async createEvent() {
+      nProgress.start()
+
       await this.$store.dispatch('event/createEvent', this.event)
 
       this.$router.push({

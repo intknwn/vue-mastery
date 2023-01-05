@@ -1,4 +1,5 @@
 import EventService from '../../services/EventService'
+import nProgress from 'nprogress'
 
 export default {
   namespaced: true,
@@ -6,6 +7,7 @@ export default {
     event: null,
     events: [],
     totalEvents: null,
+    perPage: 3,
   },
   actions: {
     async createEvent({ commit, dispatch }, event) {
@@ -31,13 +33,20 @@ export default {
         )
       }
     },
-    async fetchEvents({ commit, dispatch }, { perPage, page }) {
+    async fetchEvents({ commit, dispatch, state }, { page }) {
       try {
-        const { data, headers } = await EventService.getEvents(perPage, page)
+        const { data, headers } = await EventService.getEvents(
+          state.perPage,
+          page
+        )
         commit('SET_EVENTS', data)
         const totalEvents = parseInt(headers['x-total-count'])
         commit('SET_TOTAL_EVENTS', totalEvents)
+
+        return data
       } catch (err) {
+        nProgress.done()
+
         dispatch(
           'notification/add',
           {
