@@ -57,7 +57,7 @@ export default {
         )
       }
     },
-    async fetchEventById({ commit, getters, dispatch }, id) {
+    async fetchEventById({ commit, getters }, id) {
       const event = getters.getEventById(id)
 
       if (event) {
@@ -65,20 +65,9 @@ export default {
         return event
       }
 
-      try {
-        const { data } = await EventService.getEvent(id)
-        commit('SET_EVENT', data)
-        return data
-      } catch (err) {
-        dispatch(
-          'notification/add',
-          {
-            type: 'error',
-            message: `Something went wrong while fetching an event: ${err.message}`,
-          },
-          { root: true }
-        )
-      }
+      const { data } = await EventService.getEvent(id)
+      commit('SET_EVENT', data)
+      return data
     },
   },
   getters: {
