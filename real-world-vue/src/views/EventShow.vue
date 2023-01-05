@@ -35,15 +35,12 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapActions } = createNamespacedHelpers('event')
-
 export default {
-  props: ['id'],
-  computed: mapState(['event']),
-  methods: mapActions(['fetchEventById']),
-  created() {
-    this.fetchEventById(this.id)
+  props: {
+    event: {
+      type: Object,
+      required: true,
+    },
   },
 }
 </script>

@@ -4,14 +4,14 @@
     <EventCard v-for="event in events" :key="event.id" :event="event" />
     <router-link
       v-if="isPrevLinkShown"
-      :to="{ name: 'event-list', query: { page: currentPage - 1 } }"
+      :to="{ name: 'event-list', query: { page: page - 1 } }"
       rel="prev"
       >Previous page</router-link
     >
     <span v-if="isPrevLinkShown && isNextLinkShown"> | </span>
     <router-link
       v-if="isNextLinkShown"
-      :to="{ name: 'event-list', query: { page: currentPage + 1 } }"
+      :to="{ name: 'event-list', query: { page: page + 1 } }"
       rel="prev"
       >Next page</router-link
     >
@@ -21,36 +21,47 @@
 <script>
 import { mapState } from 'vuex'
 import EventCard from '../components/EventCard.vue'
+import store from '@/store'
+
+const getPageEvents = async (routeTo, next) => {
+  const currentPage = parseInt(routeTo.query.page) || 1
+
+  await store.dispatch('event/fetchEvents', {
+    page: currentPage,
+  })
+
+  routeTo.params.page = currentPage
+  next()
+}
 
 export default {
+  props: {
+    page: {
+      type: Number,
+      required: true,
+    },
+  },
   components: {
     EventCard,
   },
-  data() {
-    return {
-      perPage: 3,
-    }
+  beforeRouteEnter(routeTo, routeFrom, next) {
+    getPageEvents(routeTo, next)
   },
-  created() {
-    this.$store.dispatch('event/fetchEvents', {
-      perPage: this.perPage,
-      page: this.currentPage,
-    })
+  beforeRouteUpdate(routeTo, routeFrom, next) {
+    getPageEvents(routeTo, next)
   },
   computed: {
     ...mapState({
+      perPage: (state) => state.event.perPage,
       totalEvents: (state) => state.event.totalEvents,
       user: (state) => state.user.user,
       events: (state) => state.event.events,
     }),
-    currentPage() {
-      return parseInt(this.$route.query.page) || 1
-    },
     isPrevLinkShown() {
-      return this.currentPage !== 1
+      return this.page !== 1
     },
     isNextLinkShown() {
-      return this.currentPage * this.perPage < this.totalEvents
+      return this.page * this.perPage < this.totalEvents
     },
   },
 }

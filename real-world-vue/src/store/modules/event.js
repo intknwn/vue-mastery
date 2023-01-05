@@ -1,4 +1,5 @@
 import EventService from '../../services/EventService'
+import nProgress from 'nprogress'
 
 export default {
   namespaced: true,
@@ -6,6 +7,7 @@ export default {
     event: null,
     events: [],
     totalEvents: null,
+    perPage: 3,
   },
   actions: {
     async createEvent({ commit, dispatch }, event) {
@@ -31,13 +33,20 @@ export default {
         )
       }
     },
-    async fetchEvents({ commit, dispatch }, { perPage, page }) {
+    async fetchEvents({ commit, dispatch, state }, { page }) {
       try {
-        const { data, headers } = await EventService.getEvents(perPage, page)
+        const { data, headers } = await EventService.getEvents(
+          state.perPage,
+          page
+        )
         commit('SET_EVENTS', data)
         const totalEvents = parseInt(headers['x-total-count'])
         commit('SET_TOTAL_EVENTS', totalEvents)
+
+        return data
       } catch (err) {
+        nProgress.done()
+
         dispatch(
           'notification/add',
           {
@@ -48,27 +57,17 @@ export default {
         )
       }
     },
-    async fetchEventById({ commit, getters, dispatch }, id) {
+    async fetchEventById({ commit, getters }, id) {
       const event = getters.getEventById(id)
 
       if (event) {
         commit('SET_EVENT', event)
-        return
+        return event
       }
 
-      try {
-        const { data } = await EventService.getEvent(id)
-        commit('SET_EVENT', data)
-      } catch (err) {
-        dispatch(
-          'notification/add',
-          {
-            type: 'error',
-            message: `Something went wrong while fetching an event: ${err.message}`,
-          },
-          { root: true }
-        )
-      }
+      const { data } = await EventService.getEvent(id)
+      commit('SET_EVENT', data)
+      return data
     },
   },
   getters: {
