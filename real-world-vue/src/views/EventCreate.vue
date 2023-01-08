@@ -2,16 +2,12 @@
   <div>
     <h1>Create an Event</h1>
     <form @submit.prevent="createEvent">
-      <label for="category">Select category</label>
-      <select name="category" id="category" v-model="event.category">
-        <option
-          v-for="category in categories"
-          :value="category"
-          :key="category"
-        >
-          {{ category }}
-        </option>
-      </select>
+      <BaseSelect
+        class="field"
+        label="Select a category"
+        :options="categories"
+        v-model="event.category"
+      />
 
       <h3>Name describe your event</h3>
 
@@ -54,14 +50,12 @@
         />
       </div>
 
-      <div class="field">
-        <label for="time">Select a time</label>
-        <select name="time" id="time" v-model="event.time">
-          <option :value="time" v-for="time in times" :key="time">
-            {{ time }}
-          </option>
-        </select>
-      </div>
+      <BaseSelect
+        class="field"
+        label="Select a time"
+        :options="times"
+        v-model="event.time"
+      />
 
       <input type="submit" class="button -fill-gradient" value="Submit" />
     </form>
