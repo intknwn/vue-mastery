@@ -57,7 +57,9 @@
         v-model="event.time"
       />
 
-      <input type="submit" class="button -fill-gradient" value="Submit" />
+      <BaseButton type="submit" buttonClass="-fill-gradient" disabled
+        >Submit</BaseButton
+      >
     </form>
   </div>
 </template>
