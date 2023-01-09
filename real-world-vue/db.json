@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Beach Cleanup",
-      "date": "Aug 28 2018",
+      "date": "2023-01-03T21:54:00.000Z",
       "time": "10:00",
       "location": "Daytona Beach",
       "description": "Let's clean up this beach.",
@@ -34,7 +34,7 @@
     {
       "id": 2,
       "title": "Park Cleanup",
-      "date": "Nov 12 2018",
+      "date": "2023-01-31T22:09:00.000Z",
       "time": "12:00",
       "location": "132 N Magnolia Street, Orlando, Florida",
       "description": "We're going to clean up this park.",
@@ -57,7 +57,7 @@
     {
       "id": 3,
       "title": "Pet Adoption Day",
-      "date": "Dec 2 2018",
+      "date": "2023-02-02T23:27:00.000Z",
       "time": "12:00",
       "location": "132 N Magnolia Street, Orlando, Florida",
       "description": "Help animals find new homes.",
@@ -95,7 +95,7 @@
       "title": "Some event's title",
       "desc": "",
       "location": "",
-      "date": "",
+      "date": "2023-02-02T23:27:00.000Z",
       "time": "13:00",
       "attendees": []
     },
@@ -113,7 +113,7 @@
       "title": "The latest event",
       "desc": "Some description",
       "location": "St. Petersburg",
-      "date": "2023-01-13T17:52:00.000Z",
+      "date": "2023-02-02T23:27:00.000Z",
       "time": "18:00",
       "attendees": []
     }

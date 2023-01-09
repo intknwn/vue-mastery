@@ -5,7 +5,9 @@ import router from './router'
 import store from './store'
 import registerGlobals from './_globals'
 import 'nprogress/nprogress.css'
+import LocaleDateFilter from './filters/date'
 
+Vue.filter('date', LocaleDateFilter)
 Vue.use(Vuelidate)
 
 registerGlobals()
