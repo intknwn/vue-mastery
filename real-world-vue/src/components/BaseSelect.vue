@@ -1,7 +1,12 @@
 <template>
   <div>
     <label v-if="label" :for="$attrs.id">{{ label }}</label>
-    <select v-bind="$attrs" @input="updateValue" :value="value">
+    <select
+      v-bind="$attrs"
+      @input="updateValue"
+      :value="value"
+      v-on="listeners"
+    >
       <option
         v-for="option in options"
         :key="option"
@@ -25,6 +30,14 @@ export default {
     label: {
       type: String,
       default: '',
+    },
+  },
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.updateValue,
+      }
     },
   },
   methods: {
